@@ -17,7 +17,34 @@ let promiseToCleanTheRoom = new Promise (
     }
 );
 
+// promiseToCleanTheRoom
+//     .then( fromResolve =>console.log(`The room is ${fromResolve}`)) // run if promise resolved(succeed)
+//     .catch( fromReject => console.log(`The room is ${fromReject}`)) // run if the promise rejected(failled)
 
-promiseToCleanTheRoom
-    .then( fromResolve =>console.log(`The room is ${fromResolve}`)) // run if promise resolved(succeed)
-    .catch( fromReject => console.log(`The room is ${fromReject}`)) // run if the promise rejected(failled)
+//============================================
+//======= Nested promise
+//============================================
+
+let cleanRoom = () => {
+    return new Promise ((resolve, reject) => {
+       resolve('clean The room'); 
+    });
+}
+
+let removeGarbage = message =>{
+    return new Promise ((resolve, reject) => {
+        resolve(`${message}, remove Garbage`); 
+    })
+}
+
+let winIcecream = (message) => {
+    return new Promise ((resolve, reject) => {
+        resolve(`${message}, win Ice Cream`); 
+    })
+}
+
+
+cleanRoom()
+    .then( result => removeGarbage(result))
+    .then( result => winIcecream(result))
+    .then ( result => console.log(`finished: ${result}`))
