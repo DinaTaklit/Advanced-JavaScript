@@ -48,3 +48,17 @@ cleanRoom()
     .then( result => removeGarbage(result))
     .then( result => winIcecream(result))
     .then ( result => console.log(`finished: ${result}`))
+
+// Now if we want to run them all in parallel
+Promise.all([
+    cleanRoom(),
+    removeGarbage(),
+    winIcecream()
+]).then(()=> console.log('All finished!'))
+
+// Now if we want one of them be finished
+Promise.race([
+    cleanRoom(),
+    removeGarbage(),
+    winIcecream()
+]).then(()=> console.log('One of them is finished'))
